@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="scripts/lightData.js"></script>
+  <script src="scripts/utils.js"></script>
+  <script src="scripts/currentSelection.js"></script>
+  <script src="scripts/colorControl.js"></script>
+  <script src="scripts/presetLists.js"></script>
+  <script src="scripts/shapes.js"></script>
+  <script src="scripts/bluetooth.js"></script>
+  <script src="scripts/script.js"></script>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all"/>
+</head>
+
+<body>
+  <div id="Hexagon">
+    <div id="top-half" class="hexagon-half">
+      <svg id="CL_LT" class="TriPanel" viewBox="0 0 306 265">
+        <polygon points="153,0 0,265 306,265" fill="#ffffff"/>
+      </svg>
+      <svg id="CL_MT" class="TriPanel" viewBox="0 0 306 265">
+        <polygon points="153,265 0,0 306,0" fill="#ffffff"/>
+      </svg>
+      <svg id="CL_RT" class="TriPanel" viewBox="0 0 306 265">
+        <polygon points="153,0 0,265 306,265" fill="#ffffff"/>
+      </svg>
+    </div>
+    <div id="bottom-half" class="hexagon-half">
+      <svg id="CL_LB" class="TriPanel" viewBox="0 0 306 265">
+        <polygon points="153,265 0,0 306,0" fill="#ffffff"/>
+      </svg>
+      <svg id="CL_MB" class="TriPanel" viewBox="0 0 306 265">
+        <polygon points="153,0 0,265 306,265" fill="#ffffff"/>
+      </svg>
+      <svg id="CL_RB" class="TriPanel" viewBox="0 0 306 265">
+        <polygon points="153,265 0,0 306,0" fill="#ffffff"/>
+      </svg>
+    </div>
+  </div>
+  <svg id="tri-panel" viewBox="-3.5 -2 313 271">
+    <defs>
+      <linearGradient id="line-0" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#ff0004"/>
+      </linearGradient>
+      <linearGradient id="line-1" x1="100%" y1="0%" x2="0%" y2="0%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="rgb(0, 255, 111)"/>
+      </linearGradient>
+      <linearGradient id="line-2" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#0000ff"/>
+      </linearGradient>
+      <filter id="segment-shadow">
+        <feDropShadow dx="4" dy="0" stdDeviation="5" flood-opacity="0.4"/>
+      </filter>
+    </defs>
+    <rect width="100%" height="110%" x="-3.5" y="-7" fill="#00000000"/>
+    <polygon id="0-segment" class="PanelSegment" points="252.5,240, 306,268 153,-4.5 153,53" stroke-width="1" stroke="url(#line-0)" fill="url(#line-0)"></polygon>
+    <polygon id="1-segment" class="PanelSegment" points="252.5,240, 53.5,240 0,269 306,268" stroke-width="1" stoke="url(#line-1)" fill="url(#line-1)"></polygon>
+    <polygon id="2-segment" class="PanelSegment" points="53.5,240 0,268 153,-4.5 153,53" stroke-width="1" stroke="url(#line-2)" fill="url(#line-2)"></polygon>
+    <polygon id="segment-holder" points="12,261 294,261 153,10" stroke-width="16" fill="none" stroke="#ffffff"></polygon>
+    <use href="#0-segment"></use>
+    <use href="#1-segment"></use>
+    <use href="#2-segment"></use>
+  </svg>
+  <div id="color-slider">
+    <svg class="bar" height="42">
+      <defs>
+        <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="5%" stop-color="#ff3232"/>
+          <stop offset="14.5%" stop-color="#ff9900"/>
+          <stop offset="24%" stop-color="#ffff00"/>
+          <stop offset="33.5%" stop-color="#32ff00"/>
+          <stop offset="43%" stop-color="#00ff65"/>
+          <stop offset="52.5%" stop-color="#00ffff"/>
+          <stop offset="62%" stop-color="#0065ff"/>
+          <stop offset="71.5%" stop-color="#3300ff"/>
+          <stop offset="81%" stop-color="#cb00ff"/>
+          <stop offset="90.5%" stop-color="#ff0098"/>
+          <stop offset="100%" stop-color="#ff0004"/>
+        </linearGradient>
+      </defs>
+      <rect x="6" y="6" fill="url(#rainbow)" stroke-width="6" stroke="white" rx="15" ry="15" height="30"/>
+    </svg>
+    <svg class="circle" width="52" height="52">
+      <circle cx="26" cy="26" r="24" stroke-width="4" stroke="white" fill="none"></circle>
+    </svg>
+    <div id="more-color-options">
+      <div class="slider-inputs">
+        <input type="range" name="r" min="0" max="255" value="255"/>
+        <input type="range" name="g" min="0" max="255" value="255"/>
+        <input type="range" name="b" min="0" max="255" value="255"/>
+      </div>
+      <div class="number-inputs">
+        <label>R</label><input type="number" name="r" min="0" max="255" value="255"/>
+        <label>G</label><input type="number" name="g" min="0" max="255" value="255"/>
+        <label>B</label><input type="number" name="b" min="0" max="255" value="255"/>
+      </div>
+      <svg width="6" height="70" style="position: relative; bottom: 4px; right: 33%; z-index: 19;">
+        <polyline points="0,0 0,70" fill="none" stroke-linecap="round" stroke-width="6" stroke="#00aeef"/>
+      </svg>
+      <div class="brightness-inputs">
+        <span>Brightness</span>
+        <input type="range" name="brightness" min="0" max="100" value="20"/>
+      </div>
+    </div>
+    <svg class="more" width="50" height="50">
+      <circle cx="25" cy="0" r="25" fill="white"/>
+      <polyline points="15,7 25,17 35,7" fill="none" stroke-linecap="round" stroke-width="3" stroke="#00aeef"/>
+    </svg>
+  </div>
+  <div id="presets">
+  </div>
+  <div id="power-button">
+    <div class="inner">
+      <span></span>
+    </div>
+  </div>
+  <div id="modal-holder">
+    <div id="modal">
+      <h3></h3>
+    </div>
+  </div>
+  <div id="title-screen">
+    <h1>Light Control Panel</h1>
+    <button onclick="startBT()">Connect With Bluetooth</button>
+    <h3></h3>
+  </div>
+</body>
+
+</html>
