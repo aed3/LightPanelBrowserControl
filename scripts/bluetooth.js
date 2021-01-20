@@ -223,6 +223,10 @@ function resetPower() {
   WriteChar.writeValue(data);
 }
 
+function receive(event) {
+  // console.log(event.target.value.getUint8());
+}
+
 function stopBT() {
   $('#title-screen').fadeIn(ANI_SPEED);
   $('#title-screen h3').html('Bluetooth device has been disconnected.</br>Try Connecting Again');
@@ -236,6 +240,37 @@ function startBT() {
     optionalServices: [BTDeviceUUID]
   })
   .then(device => {
+    $('#title-screen h3').html(`<svg x="0px" y="0px" \ 
+      viewBox="-20 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve" \
+      style="width: 20vw; min-width: 200px"> \ 
+      <circle fill="#fff" stroke="none" cx="6" cy="50" r="6"> \ 
+        <animateTransform  \ 
+          attributeName="transform"  \ 
+          dur="1s"  \ 
+          type="translate"  \ 
+          values="0 15 ; 0 -15; 0 15"  \ 
+          repeatCount="indefinite"  \ 
+          begin="0.1"/> \ 
+      </circle> \ 
+      <circle fill="#fff" stroke="none" cx="30" cy="50" r="6"> \ 
+        <animateTransform  \ 
+          attributeName="transform"  \ 
+          dur="1s"  \ 
+          type="translate"  \ 
+          values="0 10 ; 0 -10; 0 10"  \ 
+          repeatCount="indefinite"  \ 
+          begin="0.2"/> \ 
+      </circle> \ 
+      <circle fill="#fff" stroke="none" cx="54" cy="50" r="6"> \ 
+        <animateTransform  \ 
+          attributeName="transform"  \ 
+          dur="1s"  \ 
+          type="translate"  \ 
+          values="0 5 ; 0 -5; 0 5"  \ 
+          repeatCount="indefinite"  \ 
+          begin="0.3"/> \ 
+      </circle> \ 
+    </svg>`);
     BTDevice = device;
     BTDevice.addEventListener('gattserverdisconnected', stopBT);
     return device.gatt.connect();
@@ -248,6 +283,7 @@ function startBT() {
     WriteChar = Tx;
     
     $('#title-screen').fadeOut(ANI_SPEED);
+    setTimeout(() => $('#title-screen h3').html(''), ANI_SPEED);
   })
   .catch(error =>
     $('#title-screen h3').text(error));

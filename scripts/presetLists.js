@@ -50,7 +50,7 @@ function changePresetList(level) {
         }
         else {
           $preset.find('input[type=checkbox]').change(function() {
-            if (this.checked) {
+            if (!this.checked) {
               queueData(toBinaryStr((details << 2) + levelToNum(level), 7), 7, new Uint8Array(1));
             }
             else {
